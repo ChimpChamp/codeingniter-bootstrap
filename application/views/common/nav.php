@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Project name</a>
+          <a class="brand" href="<?php base_url('index.php'); ?>">DHALIA</a>
           <div class="nav-collapse collapse">
             <?php if($this->session->userdata('username')){?>
             <p class="navbar-text pull-right">
@@ -14,11 +14,12 @@
             </p>
             <?php } ?>
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-<!--               <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
- -->            </ul>
+              <li class="active"><a href="<?php echo base_url('index.php/common/settings'); ?>">Settings</a></li>
+              <li><a href="<?php echo base_url('index.php/coupons/add'); ?>">Add Coupons</a></li>
+              <li><a href="<?php echo base_url('index.php/coupons/update'); ?>">Update Coupons</a></li>
+            </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
+    <div class="container-fluid">

@@ -24,11 +24,13 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-
-		$this->load->view('common/header');
-		$this->load->view('common/nav');
-		$this->load->view('welcome_message');
-		$this->load->view('common/footer');
+		$data = '';
+		$data['heading'] = 'DHALIA | Home';
+		
+		$this->load->view('common/header',$data);
+		$this->load->view('common/nav',$data);
+		$this->load->view('welcome_message',$data);
+		$this->load->view('common/footer',$data);
 	}
 	private function check_isvalidated(){
 		$this->load->helper('url');

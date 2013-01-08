@@ -12,11 +12,17 @@ class Login extends CI_Controller{
 	public function index($msg = NULL){
 		// Load our view to be displayed
 		// to the user
-		$data['msg'] = $msg;
-		$data['title'] = "Login";
-		$this->load->view('common/header',$data);
-		$this->load->view('loginView/login_view', $data);
-		$this->load->view('common/footer',$data);
+		$this->load->helper('url');
+
+		if($this->session->userdata('username')){
+			redirect('common/settings', 'refresh');
+		}else{
+			$data['msg'] = $msg;
+			$data['heading'] = "Login";
+			$this->load->view('common/header',$data);
+			$this->load->view('loginView/login_view', $data);
+		}
+		//$this->load->view('common/footer',$data);
 	}
 	
 	public function process(){
@@ -32,7 +38,7 @@ class Login extends CI_Controller{
 		}else{
 			// If user did validate, 
 			// Send them to members area
-			redirect('welcome','refresh');
+			redirect('common/settings','refresh');
 		}		
 	}
 	public function do_logout(){

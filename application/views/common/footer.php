@@ -1,7 +1,7 @@
 <hr>
 
       <footer>
-        <p>&copy; Company 2012</p>
+        <p>&copy; Dhalia 2013</p>
       </footer>
 
     </div><!--/.fluid-container-->
