@@ -14,7 +14,7 @@
             </p>
             <?php } ?>
             <ul class="nav">
-              <li class="active"><a href="<?php echo base_url('index.php/common/settings'); ?>">Settings</a></li>
+              <li><a href="<?php echo base_url('index.php/common/settings'); ?>">Settings</a></li>
               <li><a href="<?php echo base_url('index.php/coupons/add'); ?>">Add Coupons</a></li>
               <li><a href="<?php echo base_url('index.php/coupons/update'); ?>">Update Coupons</a></li>
             </ul>
