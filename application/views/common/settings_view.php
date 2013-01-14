@@ -23,12 +23,14 @@
         </div> -->
         <div class="span9">
           <div class="hero-unit">
-            <h2>Settings</h2>
+            <h2>Admin</h2>
             <!-- mailchimp form -->
             <div class="well">
-              <h5>MailChimp API</h5>
+              <fieldset>
+              <legend>MailChimp API</legend>
               <?php if($MCkey){ ?>
-                <p class="alert alert-success" ><?php echo $MCkey; ?><a class="pull-right" id="changeMC">Change</a></p>
+                <p class="alert alert-success" ><b>Key:</b> <i><?php echo $MCkey; ?></i><br>
+                  <b>List:</b> <i><?php echo $McList; ?></i><a class="pull-right" id="changeMC">Change</a></p>
               <?php }elseif($MCkey == ''){ ?>
                 <script>
                  $(document).ready(function() {
@@ -39,43 +41,30 @@
               <div class="MCkeyform">
                 <form class="form-inline" name="frm_MC" id="frm_MC" method="post" action="<?php echo $actionMC; ?>">
                   <input type="hidden" name="type" value="MC">
-                   <input type="text" class="input-large" name="key" placeholder="MailChimp Api Key">
+                   <input type="text" class="input-large" id="key" name="key" placeholder="MailChimp Api Key">
+                   <input type="button" class="btn btn-mini btn-primary" id="get_list" value="Get List">
+                   <select name="MC_lsit" id="MClists">
+                      <option value="0">Select a List</option>
+                    </select>
                    <button type="submit" class="btn">Submit</button>
-                   <a id="closeMcFrm" class="pull-right">X</a>
+                   <span id="closeMcFrm" class="icon-remove pull-right">&nbsp;</span>
                 </form>
 
               </div>
+            </fieldset>
             </div>
             <!-- shopify form -->
             <div class="well">
-              <h5>Shopify</h5>
-             <!--  <?php if($shopifyData){?>
-
-              <?php } ?> -->
+              <fieldset>
+              <legend>Download</legend>
+              <form method="post" id="csvDownload" action="index.php/common/settings/downloadCSV" name="csvDownload">
+                <!-- <label>Label name</label> -->
+                <input type="text" name="MF" placeholder="Enter MF File Name"><br>
+                <button class="btn btn-large btn-primary" type="submit" id="download">Download Contacts CSV</button>
+              </form>
+            </fieldset>
               <div class="shopifyFrm">
-                <form class="form-horizontal" name="frm_shopify" id="frm_shopify" method="post" action="<?php echo $actionShopify;?>">
-                  <input type="hidden" name="shopify" value="SH">
-                  <div class="control-group">
-                    <label class="control-label" for="shopName">Shop Name</label>
-                    <div class="controls">
-                      <label class="control-label show" for="API"><i><?php echo $getShop;?></i></label>
-                      <input type="text" id="shopName" class="edit" value="<?php echo $getShop;?>" name="shopName" placeholder="Shop Name">
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label" for="API">API</label>
-                    <div class="controls">
-                      <label class="control-label show" for="API"><i><?php echo $getApi;?></i></label>
-                      <input type="text" id="shopifyApi" class="edit" value="<?php echo $getApi;?>" name="shopifyApi" placeholder="API">
-                    </div>
-                  </div>
-                  <div class="control-group">
-                  <div class="controls">
-                    <a class="show" id="editShopify">Edit</a>
-                  <button type="submit" class="btn edit">Authenticate</button>
-                  </div>
-                  </div>
-                </form>
+               
             </div>
             </div>
           </div>

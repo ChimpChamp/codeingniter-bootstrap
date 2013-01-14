@@ -43,3 +43,31 @@
   text-align: left;
   font-weight: bold;
 }
+#output img{
+    left: 36%;
+    margin: auto;
+    position: relative; 
+}
+#output p{
+  text-align: center;
+}
+#output{
+  position: absolute;
+  z-index: 200;
+  width: 63.359%;
+  margin-top: 2%;
+}
+#Uploadbox{
+  position: relative;
+  z-index: 100;
+
+}
+.hero-unit {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.bar {
+    height: 18px;
+    background: green;
+}

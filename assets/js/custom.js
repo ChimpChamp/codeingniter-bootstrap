@@ -4,14 +4,17 @@ $('#frm_MC').submit(function(event) {
 	event.preventDefault();
 	var $form = $( this ),
   key = $form.find( 'input[name="key"]' ).val(),
+  list = $form.find( 'select[name="MC_lsit"]' ).val(),
   url = $form.attr( 'action' );
   if(key == ''){
   	alert('No API key');
+  }else if(list == 0){
+  	alert('Select a list');
   }else{
 		$.ajax({
 		  type: "POST",
 		  url: url,
-		  data: {key : key},
+		  data: {key : key , list :list},
 		  dataType: 'json',
 		  success: function(data) {
 		  	if(data == true){
@@ -63,3 +66,69 @@ $('#frm_shopify').submit(function(event) {
 	}
   return false;
 });
+$('#get_list').click(function(){
+    var key = $('#key').val();
+    
+    if(!key){
+      alert('Enter a key first');
+    }else{
+      var options = $("#MClists");
+      options.empty();
+      $('#loading-image').show();
+      $.ajax({
+        url: "index.php/common/settings/getList",
+        type: "post",
+        data: { key: key},
+        datatype: "json",
+        success: function(response){
+          if(response == 0){
+            alert("No lists Found or Incorrect API Key");
+          }else{
+          for(var i = 0; i < response.length; ++i)
+          {
+            $.each(response[i], function(id, name){
+              options.append("<option value='"+ id +"'>"+ name +"</option>");
+            });
+          }
+          }
+        },
+        complete: function(){	
+         $('#loading-image').hide();
+       }
+      });
+    }
+    
+  });
+$('#download').click(function(event) {
+  event.preventDefault();
+  var form = $('#csvDownload');
+  var url = form.attr( 'action' );
+  var MfFile = form.find( 'input[name="MF"]' ).val();
+  if(MfFile == ''){
+    alert('Please enter MF File Name.');
+  }else{
+    $('#csvDownload').submit();
+  }
+  return false;
+});
+// $('#download').click(function(){
+//    $.ajax({
+//     url: "index.php/common/settings/downloadCSV",
+//     type: "post",
+//     data: '',
+//     datatype: "json",
+//     success: function(response){
+//       if(response == 0){
+//         alert("No lists Found or Incorrect API Key");
+//       }else{
+//         for(var i = 0; i < response.length; ++i)
+//         {
+          
+//         }
+//       }
+//     },
+//     complete: function(){ 
+//      $('#loading-image').hide();
+//    }
+//   });
+// });

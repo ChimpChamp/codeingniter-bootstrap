@@ -1,7 +1,7 @@
 <hr>
 
       <footer>
-        <p>&copy; Dhalia 2013</p>
+        <p>&copy; Overhaul  2013</p>
       </footer>
 
     </div><!--/.fluid-container-->
@@ -22,6 +22,8 @@
     <script src="assets/js/bootstrap-collapse.js"></script>
     <script src="assets/js/bootstrap-carousel.js"></script>
     <script src="assets/js/bootstrap-typeahead.js"></script>
+
+    
     <script src="assets/js/custom.js"></script>
 
   </body>

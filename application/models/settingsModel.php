@@ -18,16 +18,33 @@ class SettingsModel extends CI_Model{
 			return $result->value;
 		}
 	}
-	public function InsertMC($key){
-		if($key){
+	public function GetMailchimpList(){
+
+		$where = "type = 'MC' AND name = 'list'";
+		$this->db->where($where);
+		$query = $this->db->get('tbl_key');
+		$result = $query->row();
+		$rowcount = $query->num_rows();
+		if($rowcount == 0){
+			return 0;
+		}else{
+			return $result->value;
+		}
+	}
+	public function InsertMC($data){
+		if($data){
 			$this->db->delete('tbl_key', array('type' => 'MC'));
 
-			$data = array(
-			   'type' => 'MC' ,
-			   'name' => 'key' ,
-			   'value' => $key
-			); 
-			$this->db->insert('tbl_key', $data); 
+			foreach ($data as $key => $value) {
+				if($key != "type"){
+					$data  = array(
+							'type' => 'MC' ,
+					   		'name' => mysql_real_escape_string($key) ,
+					   		'value' =>  mysql_real_escape_string($value)
+						); 
+					$this->db->insert('tbl_key', $data);
+				}
+			} 
 		}
 	}
 
@@ -57,5 +74,6 @@ class SettingsModel extends CI_Model{
 			return $query->result();
 		}
 	}
+
 }
 ?>

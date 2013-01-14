@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/codeigniter212/';
+$config['base_url']	= 'http://localhost/overhaul-network/';
 
 /*
 |--------------------------------------------------------------------------
