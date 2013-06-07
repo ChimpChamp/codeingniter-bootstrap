@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/overhaul-network/';
+$config['base_url']	= 'http://localhost/codeingniter-bootstrap/';
 
 /*
 |--------------------------------------------------------------------------

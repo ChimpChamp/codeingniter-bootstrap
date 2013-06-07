@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="<?php base_url('index.php'); ?>">Overhaul</a>
+          <a class="brand" href="<?php base_url('index.php'); ?>">ChimpChamp</a>
           <div class="nav-collapse collapse">
             <?php if($this->session->userdata('username')){?>
             <p class="navbar-text pull-right">
@@ -14,8 +14,7 @@
             </p>
             <?php } ?>
             <ul class="nav">
-              <li><a href="<?php echo base_url('index.php/common/settings'); ?>">Admin</a></li>
-              <li><a href="<?php echo base_url('index.php/contacts/add'); ?>">Upload</a></li>
+              <li><a href="<?php echo base_url('index.php/common/settings'); ?>">Settings</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

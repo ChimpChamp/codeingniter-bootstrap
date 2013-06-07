@@ -23,14 +23,14 @@
         </div> -->
         <div class="span9">
           <div class="hero-unit">
-            <h2>Admin</h2>
+            <h2>Settings</h2>
             <!-- mailchimp form -->
             <div class="well">
               <fieldset>
               <legend>MailChimp API</legend>
               <?php if($MCkey){ ?>
-                <p class="alert alert-success" ><b>Key:</b> <i><?php echo $MCkey; ?></i><br>
-                  <b>List:</b> <i><?php echo $McList; ?></i><a class="pull-right" id="changeMC">Change</a></p>
+                <p class="alert alert-success" ><b>Key:</b> <i><strong><?php echo $MCkey; ?></strong></i><br>
+                  <b>List:</b> <i><strong><?php echo $McList; ?></strong></i><a class="pull-right" id="changeMC">Change</a></p>
               <?php }elseif($MCkey == ''){ ?>
                 <script>
                  $(document).ready(function() {
@@ -53,22 +53,31 @@
               </div>
             </fieldset>
             </div>
-            <!-- shopify form -->
             <div class="well">
               <fieldset>
-              <legend>Download</legend>
-              <form method="post" id="csvDownload" action="index.php/common/settings/downloadCSV" name="csvDownload">
-                <!-- <label>Label name</label> -->
-                <input type="text" name="MF" placeholder="Enter MF File Name"><br>
-                <button class="btn btn-large btn-primary" type="submit" id="download">Download Contacts CSV</button>
-              </form>
+              <legend>Mandrill API</legend>
+              <?php if($MDkey){ ?>
+                <p class="alert alert-success" ><b>Key:</b> <i><strong><?php echo $MDkey; ?></strong></i>
+                  <a class="pull-right" id="changeMD">Change</a></p>
+              <?php }elseif($MDkey == ''){ ?>
+                <script>
+                 $(document).ready(function() {
+                    $('.MDkeyform').show();
+                  });
+                </script>
+              <?php } ?>
+              <div class="MDkeyform">
+                <form class="form-inline" name="frm_MD" id="frm_MD" method="post" action="<?php echo $actionMD; ?>">
+                  <input type="hidden" name="type" value="MC">
+                  <input type="text" class="input-large" id="key" name="key" placeholder="Mandrill Api Key">
+                  <button type="submit" class="btn">Submit</button>
+                  <span id="closeMdFrm" class="icon-remove pull-right">&nbsp;</span>
+                </form>
+
+              </div>
             </fieldset>
-              <div class="shopifyFrm">
-               
             </div>
-            </div>
-          </div>
-          
+          </div>   
         </div><!--/span-->
       </div><!--/row-->
       <?php if($getShop){?>

@@ -32,10 +32,10 @@
 		font-weight: bold;
 	  	color: #404040;
 	  }
-.MCkeyform{
+.MCkeyform,.MDkeyform{
   display: none;
 }
-#closeMcFrm,#changeMC{
+#closeMcFrm,#changeMC,#closeMdFrm,#changeMD{
   cursor: pointer;
   text-decoration: none;
 }

@@ -1,7 +1,7 @@
 <hr>
 
       <footer>
-        <p>&copy; Overhaul  2013</p>
+        <p>&copy; Chimp Champ  2013</p>
       </footer>
 
     </div><!--/.fluid-container-->

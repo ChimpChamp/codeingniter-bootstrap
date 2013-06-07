@@ -10,6 +10,7 @@ class settings extends CI_Controller{
 		$this->load->model('SettingsModel');
 		$this->mckey = $this->SettingsModel->GetMailchimpApi();
 		$this->mcList = $this->SettingsModel->GetMailchimpList();
+		$this->mdkey = $this->SettingsModel->GetMD();
 	}
 	public function index(){
 		if($this->mckey && $this->mcList){
@@ -43,6 +44,12 @@ class settings extends CI_Controller{
 		}else{
 			$data['MCkey'] = $this->mckey;
 		}
+
+		if($this->mdkey == '0'){
+			$data['MDkey'] = '';
+		}else{
+			$data['MDkey'] = $this->mdkey;
+		}
 		// GET SHOPIFY DATA
 		$data['getShop'] = '';
 		$data['getApi'] = '';
@@ -60,8 +67,9 @@ class settings extends CI_Controller{
 			}
 		}
 
-		$data['heading'] = 'DHALIA | Settings';
+		$data['heading'] = 'Settings';
 		$data['actionMC'] =	site_url('common/settings/MailchimpKey');
+		$data['actionMD'] =	site_url('common/settings/MandrillKey');
 		$data['actionShopify'] = site_url('common/settings/InsertShopify');
 
 		$this->load->view('common/header',$data);
@@ -91,6 +99,39 @@ class settings extends CI_Controller{
 		}
 		
 	}
+
+	public function MandrillKey(){
+		$this->load->model('SettingsModel');
+		header('Content-Type: application/json');
+		if($_POST['key']){
+
+			$data["key"] = $_POST['key'];
+			$json_data = json_encode($data);
+
+			$ch = curl_init('https://mandrillapp.com/api/1.0/users/ping.json');
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			    'Content-Type: application/json',                                                                                
+			    'Content-Length: ' . strlen($json_data))
+			);
+
+			$result = curl_exec($ch);
+			$result = json_decode($result);	
+			$type = gettype($result); 
+			if($type == 'string'){
+				$this->SettingsModel->InsertMD($_POST['key']);
+				echo 'true';
+			}elseif($type == 'object'){
+				echo 'false';
+			}
+		}else{
+			echo "null";	
+		}
+	}
+
 	public function getList(){
 		$key =$_POST['key'];
 		$config1 = array(
@@ -116,51 +157,6 @@ class settings extends CI_Controller{
 		
 		//echo $json;
 		//return $json;
-	}
-	public function InsertShopify(){
-		$this->load->model('SettingsModel');
-		header('Content-Type: application/json');
-		if($_POST){
-			$isnert = $this->SettingsModel->InsertSHInfo($_POST);
-		}
-		echo 1;
-	}
-
-	public function downloadCSV(){
-		header('Content-Type: application/json');
-
-		//output headers so that the file is downloaded rather than displayed
-		header('Content-Type: text/csv; charset=utf-8');
-		header('Content-Disposition: attachment; filename=data.csv');
-		$MFname = $_POST['MF'];
-
-		// create a file pointer connected to the output stream
-		$output = fopen('php://output', 'w');
-
-		// fetch the data
-		$rows = mysql_query('SELECT * FROM contacts');
-		$fields = array();
-		$i = 0;
-		while ($i < mysql_num_fields($rows)) {
-			$field = mysql_fetch_field($rows,$i);
-			$fields[] = $field->name;
-			$i++;
-		}
-		
-		// output the column headings
-		fputcsv($output, $fields);
-
-		// loop over the rows, outputting them
-		while ($row = mysql_fetch_assoc($rows)){
-			$row['mf_file'] = $MFname;
-			if($row['name'] == ''){
-				$row = false;
-			}
-			if($row){
-				fputcsv($output, $row);
-			}
-			
-		}
 	}
 
 	private function check_isvalidated(){

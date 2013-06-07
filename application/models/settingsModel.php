@@ -39,8 +39,8 @@ class SettingsModel extends CI_Model{
 				if($key != "type"){
 					$data  = array(
 							'type' => 'MC' ,
-					   		'name' => mysql_real_escape_string($key) ,
-					   		'value' =>  mysql_real_escape_string($value)
+					   	'name' => mysql_real_escape_string($key) ,
+					   	'value' =>  mysql_real_escape_string($value)
 						); 
 					$this->db->insert('tbl_key', $data);
 				}
@@ -48,6 +48,29 @@ class SettingsModel extends CI_Model{
 		}
 	}
 
+	public function InsertMD($key){
+		if($key){
+			$this->db->delete('tbl_key', array('type' => 'MD', 'name' => 'key'));
+			$data  = array(
+							'type' => 'MD' ,
+					   	'name' => 'key',
+					   	'value' =>  mysql_real_escape_string($key)
+						); 
+			$this->db->insert('tbl_key', $data);
+		}
+	}
+	public function GetMD(){
+		$where = "type = 'MD' AND name = 'key'";
+		$this->db->where($where);
+		$query = $this->db->get('tbl_key');
+		$result = $query->row();
+		$rowcount = $query->num_rows();
+		if($rowcount == 0){
+			return 0;
+		}else{
+			return $result->value;
+		}
+	}
 	public function InsertSHInfo($params){
 		if($params){
 			$this->db->delete('tbl_key', array('type' => 'SH'));
